@@ -5,13 +5,8 @@
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Forest implements Serializable {
-
-    // Constants
-    public static final int MINIMUM_DATE = 2000, MAXIMUM_DATE = 2024;
-    public static final double MINIMUM_HEIGHT_GROWTH = 10.0, MAXIMUM_HEIGHT_GROWTH = 20.0;
 
     // Arraylist of tree objects in forest.
     ArrayList<Tree> trees;
@@ -38,26 +33,10 @@ public class Forest implements Serializable {
     } // end of displayForest method
 
     /**
-     * Creates new Tree object and randomizes its properties.
-     * @return Randomized tree object.
-     */
-    public Tree randomTree() {
-        Random rand = new Random();
-
-        String randSpecies = Tree.Species.values()[rand.nextInt(Tree.Species.values().length)].name(); // random species between Birch, Maple and Fir
-        int randDate = rand.nextInt(MINIMUM_DATE,MAXIMUM_DATE + 1); // random date between 2000 and 2024
-        double randFeet = rand.nextDouble(MINIMUM_HEIGHT_GROWTH, MAXIMUM_HEIGHT_GROWTH); // random height between 10.00' and 19.99'
-        double randGrowth = rand.nextDouble(MINIMUM_HEIGHT_GROWTH, MAXIMUM_HEIGHT_GROWTH); // random height between 10.0 and 19.9%
-
-        return new Tree(randSpecies, randDate, randFeet, randGrowth);
-    } // end of randomTree method
-
-    /**
-     * Default method;
-     * adds new randomized tree to end of the forest.
+     * Adds new randomized tree to end of the forest.
      */
     public void addTree() {
-        trees.add(randomTree());
+        trees.add(new Tree());
     } // end of addTree method
 
     /**
@@ -102,7 +81,7 @@ public class Forest implements Serializable {
     public void reapTrees(double reapHeight) {
         for (int index = 0; index < trees.size(); index++) {
             if (trees.get(index).getFeet() > reapHeight) { // If tree is above reap height, reap it
-                trees.set(index, randomTree());
+                trees.set(index, new Tree());
             }
         }
     } // end of reapHeight method
